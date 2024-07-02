@@ -1,0 +1,273 @@
+﻿﻿@using ETicaret.Entity;
+@model Product
+@using System.Web;
+@{
+    ViewBag.Title = "Details";
+}
+
+<div id="product-details" class="container pb-5">
+    <div class="row">
+
+        <div class="col-md-6">
+            <img src="/Upload/@Model.Image" class="img-fluid rounded ">@*resim köşesini yuvarlar*@
+        </div>
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1>@Model.Name</h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+
+                    @if (Model.IsApproved)
+                    {
+                        <span class="badge badge-primary">Stokta</span>
+                    }
+                    else
+                    {
+                        <span class="badge badge-danger">Stokta Yok</span>
+                    }
+
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col-md-12">
+                    <div id="description" class="readmore">
+                        @Model.Description
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-3">
+            </div>
+            <div class="row mt-3">
+                <div class="col-md-12">
+                    <h4 id="product-price">@Model.StarNum</h4>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-md-12">
+                    <h4 id="product-price">@Model.Price TL</h4>
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col-md-12">
+
+                    @using (Html.BeginForm("AddToCart", "Cart"))
+                    {
+                        @Html.HiddenFor(i => i.Id)
+                        <button type="submit" class="btn btn-success">
+                            <i class="fa fa-cart-plus" aria-hidden="true"></i>
+                            Sepete Ekle
+                        </button>
+                    }
+
+                </div>
+            </div>
+
+
+            <div class="">
+
+
+
+            </div>
+        </div>
+
+        <div class="row mt-3">
+            <div class="col-md-12">
+                <div class="bd-example bd-example-tabs">
+                    <ul class="nav nav-tabs mb-3" id="pills-tab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="pills-description-tab" data-toggle="pill" href="#pills-description" role="tab" aria-controls="pills-description" aria-expanded="true">Ürün Açıklaması</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="pills-payment-tab" data-toggle="pill" href="#pills-payment" role="tab" aria-controls="pills-payment" aria-expanded="true">Puanlama</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="pills-comment-tab" data-toggle="pill" href="#pills-comment" role="tab" aria-controls="pills-comment" aria-expanded="true">Yorumlar</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content" id="pills-tabContent">
+                        <div class="tab-pane fade show active" id="pills-description" role="tabpanel" aria-labelledby="pills-description-tab">
+                            <p> açıklama</p>
+                        </div>
+                        <div class="tab-pane fade" id="pills-payment" role="tabpanel" aria-labelledby="pills-payment-tab">
+                      
+
+                            <style>
+                                .Rating-container {
+                                    width: 100%;
+                                    text-align: center;
+                                    padding: 20px;
+                                }
+
+                                .Rating-input {
+                                    background-color: #f5f5f5;
+                                    border: 1px solid #ccc;
+                                    border-radius: 5px;
+                                    padding: 20px;
+                                    display: inline-block;
+                                    text-align: left;
+                                    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+                                    max-width: 400px;
+                                    margin: 0 auto;
+                                }
+
+                                .input-name,
+                                textarea {
+                                    width: 100%;
+                                    padding: 10px;
+                                    margin-bottom: 10px;
+                                    border: 1px solid #ccc;
+                                    border-radius: 3px;
+                                }
+
+                                .submit-button {
+                                    background-color: #007BFF;
+                                    color: #fff;
+                                    border: none;
+                                    border-radius: 5px;
+                                    padding: 10px 20px;
+                                    cursor: pointer;
+                                    font-weight: bold;
+                                    transition: background-color 0.3s ease;
+                                }
+
+                                    .submit-button:hover {
+                                        background-color: #0056b3;
+                                    }
+                            </style>
+                          
+
+                            @using (Html.BeginForm("Rating", "Home", FormMethod.Post))
+                            {
+                                <div class="Rating-container">
+                                    <div class="Rating-input">
+                                        <input type="number" name="id" style="display:none" class="input-name" placeholder="" value="@Model.Id">
+                                        <input type="number" name="rating" class="input-name" placeholder="Puan"  min="1" max="5">                                    
+                                        <button type="submit" class="submit-button">GÖNDER</button>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                        <div class="tab-pane fade" id="pills-comment" role="tabpanel" aria-labelledby="pills-comment-tab">
+
+                            <style>
+                                .comment-input {
+                                    display: flex;
+                                    flex-direction: column;
+                                    margin-bottom: 20px;
+                                }
+
+                                .input-name,
+                                textarea {
+                                    margin-bottom: 10px;
+                                    padding: 10px;
+                                    border: 1px solid #ddd;
+                                    border-radius: 5px;
+                                }
+
+                                .submit-button {
+                                    background-color: #007bff;
+                                    color: #fff;
+                                    border: none;
+                                    border-radius: 5px;
+                                    padding: 10px 15px;
+                                    cursor: pointer;
+                                    transition: background-color 0.3s;
+                                }
+
+                                    .submit-button:hover {
+                                        background-color: #0056b3;
+                                    }
+
+                                .comments-container {
+                                    width: 100%;
+                                    margin-top: 20px;
+                                }
+
+                                .comment-list {
+                                    border: 1px solid #ddd;
+                                    border-radius: 5px;
+                                    padding: 10px;
+                                    background-color: #fff;
+                                }
+
+                                .comment {
+                                    display: flex;
+                                    margin-bottom: 20px;
+                                }
+
+                                .user-info {
+                                    flex: 1;
+                                    display: flex;
+                                    flex-direction: column;
+                                    align-items: center;
+                                }
+
+                                .avatar {
+                                    width: 50px;
+                                    height: 50px;
+                                    border-radius: 50%;
+                                    margin-bottom: 10px;
+                                }
+
+                                .username {
+                                    font-weight: bold;
+                                }
+
+                                .comment-content {
+                                    flex: 4;
+                                    padding-left: 10px;
+                                }
+
+                                .comment-text {
+                                    margin-bottom: 5px;
+                                }
+
+                                .comment-date {
+                                    color: #888;
+                                }
+                            </style>
+
+                            @*</div>*@
+
+                            <div id="leave-comment">
+                                <h5>Yorum Yap</h5>
+                                @using (Html.BeginForm("Comment", "Home", FormMethod.Post))
+                                {
+                            <div class="comment-input">
+                                
+                                <input type="text" name="id" style="display:none" class="input-name" placeholder="" value="@Model.Id">
+                                <input type="text" name="txtAd" class="input-name" placeholder="Kullanıcı Adı">
+                                <textarea name="Comment" placeholder="Yorum Yaz"></textarea>
+                                <button type="submit" class="submit-button">GÖNDER</button>
+                            </div>
+                                }
+                            </div>
+
+                            <div class="comments-container">
+                                <h5>Yorumlar</h5>
+                                <div class="comment-list">
+                                    @foreach (var item in Model.Comment)
+                                    {
+                                        <div class="comment">
+                                            <div class="comment-content">
+                                                <p class="comment-text">@item.Body</p>
+                                                <p class="comment-date">@item.CreatedDate.ToString("dd.MM.yyyy 'AT' H:mm")</p>
+
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

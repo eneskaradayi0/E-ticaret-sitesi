@@ -1,0 +1,20 @@
+﻿﻿@using ETicaret.Models;
+@model IEnumerable<ProductModel>
+
+<div class="jumbotron">
+
+    <div class="container">
+        <h1 class="display-3">HOŞGELDİNİZ!</h1>
+        <i><p class="lead">Alışverişi Keşfet, Hayatı Şopsy'le Renklendir!</i></p>
+        <hr class="my-4">
+        @*<p>Daha Fazla Bilgi Almak İçin Tıklayınız</p>
+            <p class="lead">
+                <a class="btn btn-primary btn-lg" href="#" role="button">TIKLAYINIZ...</a>
+            </p>*@
+    </div>
+</div>
+
+
+<div class="container pb-5">
+    @Html.Partial("_ProductList", Model)
+</div>
